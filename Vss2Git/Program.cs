@@ -25,11 +25,19 @@ namespace Hpdi.Vss2Git
     static class Program
     {
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            if (args.Length > 0)
+            {
+                if (!new CommandLineClient(args).Start())
+                    Environment.Exit(1);
+            }
+            else
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new MainForm());
+            }
         }
     }
 }
